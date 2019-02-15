@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //单张图片加载
+        // let promise = new Promise((resolve, reject) => {
+        //     const img = new Image();
+        //     img.onload = () => {
+        //         resolve(img)
+        //     }
+        //     img.onerror = () => {
+        //         reject("找不到该图片")
+        //     }
+        //     img.src = "http://pic27.nipic.com/20130225/4746571_081826094000_2.jpg"
+        // });
+
+        // promise.then((img) => {
+        //     document.body.appendChild(img)
+        // }, (ms) => {
+        //     console.log(ms)
+        // })
+
+
+        //单张图片加载
+        // let promise = new Promise((resolve, reject) => {
+        //     const img = new Image();
+        //     img.onload = () => {
+        //         resolve(img)
+        //     }
+        //     img.onerror = () => {
+        //         reject("找不到该图片")
+        //     }
+        //     img.src = "http://pic27.nipic.com/20130225/4746571_081826094000_2.jpg"
+        // })
+        // promise.then((img) => {
+        //     document.body.appendChild(img)
+        // }, (ms) => {
+        //     console.log(ms)
+        // })
+        // console.log(promise)
+
+
+        //catch捕捉
+        // let promise = new Promise((resolve, reject) => {
+        //     const img = new Image();
+        //     img.onload = () => {
+        //         resolve(img)
+        //     }
+        //     img.onerror = () => {
+        //         reject("找不到该图片")
+        //     }
+        //     img.src = "http://pic27.nipic.com/20130225/4746571_081826094000_2.jpg"
+        // })
+
+        // promise.then((img) => {
+        //     document.body.appendChild(img)
+        // }).catch((ms) => {
+        //     console.log(ms)
+        // })
+
+        //多张图片加载
+        // function getImage(url) {
+        //     return new Promise((resolve, reject) => {
+        //         const img = new Image();
+        //         img.onload = () => {
+        //             resolve(img)
+        //         }
+        //         img.onerror = () => {
+        //             reject("找不到该图片")
+        //         }
+        //         img.src = url;
+        //     })
+        // }
+
+        // getImage("https://img.alicdn.com/simba/img/TB1y1TqEIfpK1RjSZFOSuu6nFXa.jpg").then((img) => {
+        //     document.body.appendChild(img)
+        // })
+        // getImage("https://img.alicdn.com/simba/img/TB1tzXbBNTpK1RjSZFMSuvG_VXa.jpg").then((img) => {
+        //     document.body.appendChild(img)
+        // })
+        // getImage("https://img.alicdn.com/tps/i4/TB1iEybE4TpK1RjSZFKSuu2wXXa.jpg_q90_.webp").then((img) => {
+        //     document.body.appendChild(img)
+        // })
+
+        //多张图片加载 数组
+        let data = [{
+            src: "https://img.alicdn.com/simba/img/TB1y1TqEIfpK1RjSZFOSuu6nFXa.jpg",
+            title: "图片1"
+        }, {
+            src: "https://img.alicdn.com/simba/img/TB1tzXbBNTpK1RjSZFMSuvG_VXa.jpg",
+            title: "图片2"
+        }, {
+            src: "https://img.alicdn.com/tps/i4/TB1iEybE4TpK1RjSZFKSuu2wXXa.jpg_q90_.webp",
+            title: "图片3"
+        }]
+
+        function getImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    resolve(img);
+                }
+                img.onerror = () => {
+                    reject("图片加载失败")
+                }
+                img.src = url
+            })
+        }
+        let allImg = data.map((item) => {
+            return getImage(item.src)
+        });
+        Promise.all(allImg).then((arr) => {
+            arr.forEach((item) => {
+                document.body.appendChild(item)
+            })
+        })
+
+        //封装ajax 实现轮播效果
+    </script>
+</body>
+
+</html>

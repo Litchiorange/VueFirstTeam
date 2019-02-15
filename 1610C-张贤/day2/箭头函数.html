@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <button id="btn">点击</button> -->
+    <script>
+        // let fun = function() {
+
+        // }
+
+        // let fun1 = (str, n) => {
+        //     return '该字符串' + str + '是' + n
+        // }
+
+        // console.log(fun1("hello word", 10))
+
+        // let Table = function() {
+        //     console.log(arguments)
+        // }
+        // Table(10, 20, 30, 40)
+        // let Person = (...n) => {
+        //     return n.reduce((prev, next) => prev + next);
+        // }
+        // console.log(Person(10, 20, 30, 40))
+
+        // let btn = document.querySelector("#btn");
+        // btn.addEventListener("click", () => {
+        //     console.log("箭头函数" + this.innerHtml)
+        // })
+        // btn.addEventListener("click", function() {
+        //     console.log("普通函数" + this.innerHtml)
+        // })
+
+
+        let promise = new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+                resolve(img)
+            }
+            img.onerror = () => {
+                reject("找不到该图片")
+            }
+            img.src = "http://pic27.nipic.com/20130225/4746571_081826094000_2.jpg"
+        });
+
+        promise.then((img) => {
+            document.body.appendChild(img)
+        }, (ms) => {
+            console.log(ms)
+        })
+    </script>
+
+
+</body>
+
+</html>
