@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let promise = new Promise((resolve, reject) => {
+            //resolve是成功执行的操作 在传递出去
+            //reject是失败执行的操作
+
+            const img = new Image();
+
+            img.onload = () => {
+                resolve(img);
+            }
+            img.onerror = () => {
+                reject('找不到图片');
+            }
+
+            img.src = './image/timg2-1.jpg';
+
+        });
+
+        promise.then((img) => {
+            document.body.appendChild(img);
+        }, (mess) => {
+            alert(mess);
+        })
+
+        //catch捕捉错误
+        // promise.then((img) => {
+        //     document.body.appendChild(img);
+        // }).catch((error) => {
+        //     alert(error)
+        // })
+    </script>
+
+</body>
+
+</html>

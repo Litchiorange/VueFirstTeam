@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="ipt">
+    <button class="search">搜索</button>
+    <script>
+        let data = [{
+            name: '鬼吹灯',
+            person: '天下霸唱'
+        }, {
+            name: '白夜行',
+            person: '东野硅谷'
+        }, {
+            name: '飞鸟集',
+            person: '泰戈尔'
+        }];
+
+        const ipt = document.querySelector('.ipt');
+        const search = document.querySelector('.search');
+        search.onclick = function() {
+            //值
+            let iptvalue = ipt.value.trim();
+            //正则
+            let reg = new RegExp(iptvalue)
+            console.log(data.find(function(item) {
+                return reg.test(item.name) || reg.test(item.person)
+            }));
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    年龄:{age:age}<br>
+    <button id="add">增加</button>
+    <script>
+        let obj = {
+            age: 20
+        };
+
+        //进入页面就调用函数  立即执行
+        Views(obj);
+
+        let add = document.querySelector('#add');
+        add.onclick = function() {
+            obj.age++;
+            Views(obj);
+        };
+
+
+        function Views(data) {
+            console.log(data)
+        }
+    </script>
+</body>
+
+</html>

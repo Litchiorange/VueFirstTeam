@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let fn = function() {
+
+        };
+        //箭头函数的语法
+        let fun = (str, n) => ({
+            text: str,
+            length: n
+        })
+        console.log(fun('箭头函数的语法', 7))
+
+        //1、不能使用构造函数
+        let Num = function() {
+            console.log(arguments);
+        }
+        new Num(10, 20, 30, 40, 50);
+
+        let SumNew = (...n) => n.reduce((prev, next) => prev + next)
+
+        // new SumNew(); //不是一个构造函数  constructor
+        console.log(SumNew(10, 20, 30))
+
+        //2、不能使用arguments
+        let ArrNum = () => {
+            // console.log(arguments);
+        }
+        ArrNum(10, 20, 30, 40);
+
+        //3、不能修改this指向
+        var name = 'window';
+
+        let textFn = () => {
+            console.log(this.name) //window
+        }
+        let obj = {
+            name: '张三'
+        }
+        textFn.call(obj); //修改指向 (应该指向张三)
+        // textFn()
+        //4、this指向在定义时形成 不能修改
+        var word = 'windows';
+
+        let wordFn = () => {
+            console.log(this.word)
+        }
+        let newobj = {
+            word: "赵文姣",
+            show: () => { //在window下定义的  所以还是指向window
+                    console.log(this.word)
+                }
+                // show() {
+                //     console.log(this.word)
+                // }
+        };
+        // wordFn.call(newobj);
+        newobj.show();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //let   
+        //1. 块级作用域
+        //2. 不会变量提升
+        //3. 在同一作用域内不能产生相同变量
+        //4. es6明确规定在当前作用域下使用let和const声明变量在该变量之前不允许赋值，会形成一个暂时性死区 
+        
+
+        // if(10>5){
+        //     let str='window';
+        //     console.log(str);
+        //     {
+        //         console.log(str);
+        //     }
+        // }
+        // console.log(str);
+
+        // let arr=['1','2','3'];
+        // for(let i = 0 ; i < arr.length;i++){
+        //     setTimeout(function(){
+        //         alert(arr[i])
+        //     },100)
+        // }
+
+        //const 用来声明常量
+
+        const obj={
+
+        };
+        obj.name='zhangsan';
+        obj['age']='20';
+        console.log(obj);
+
+        //splice 会修改原数组
+        //slice  不会修改原数组
+        //引用类型 存储在堆内存
+        //基本类型 存储在栈内存
+
+        const arr=['alert','console','document'];
+        arr.splice(0,2);
+        console.log(arr);
+
+
+    </script>
+</body>
+</html>

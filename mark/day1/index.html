@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = ['item1', 'item2', 'item3', 'item4', 'item5'];
+        let section = [{
+            content: 'section1',
+            index: 0
+        }, {
+            content: 'section2',
+            index: 2
+        }];
+
+        function injectSections(arr, section) {
+            let newSect = section.sort(function(a, b) {
+                return b.index - a.index;
+            });
+
+            for (let i of newSect) {
+                arr.splice(i.index, 0, i.content);
+            }
+            console.log(arr);
+            return arr;
+        }
+
+        injectSections(arr, section);
+    </script>
+</body>
+
+</html>

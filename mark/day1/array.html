@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrap">
+        父元素
+        <div class="box">子元素</div>
+    </div>
+    <script>
+        let arr = [1, 2, 3];
+        console.log(Object.keys(arr)) //下标 ['0','1','2'];
+        console.log(Object.entries(arr)) //下标，值  
+            //(3) [Array(2), Array(2), Array(2)]
+            // 0: (2) ["0", 1]
+            // 1: (2) ["1", 2]
+            // 2: (2) ["2", 3]
+        console.log(Object.values(arr)) //值  [1, 2, 3]
+
+        let obj = {
+            name: '张三',
+            age: 24
+        }
+
+        function format(options) {
+            return Object.entries(options).map(function(item) {
+                return item.join('=');
+            }).join('&');
+        }
+        console.log(format(obj))
+
+
+        Array.from(document.querySelectorAll('div'), function(item) {
+            console.log(item) //每一项的节点
+                //    item.onclick=function(){
+                //       alert()
+                //    } 
+        })
+
+
+        //keys
+        //of
+        let arrs = [1, 2, 3, 4, 5, 6];
+        let arrsNew = arrs.entries();
+        console.log(arrsNew);
+        for (let val of arrsNew) {
+            console.log(val) //每一项
+        }
+        let getArr = ['a', 'b', 'c'];
+
+        function getInterator(Arr) {
+            //下标
+            let index = 0;
+            //返回出去的值给了newGetArr
+            return {
+                //调用这个方法
+                next: function() {
+                    //最后才返回出去一个对象
+                    return {
+                        value: Arr[index++],
+                        done: index > Arr.length
+                    }
+                }
+            }
+        }
+        let newGetArr = getInterator(getArr);
+        console.log(newGetArr.next());
+        console.log(newGetArr.next());
+        console.log(newGetArr.next());
+        console.log(newGetArr.next());
+
+
+        console.log(Array.of(10, 20, 30, 40))
+
+        let newStr = 'wqer';
+        console.log(newStr.startsWith('q'));
+    </script>
+</body>
+
+</html>

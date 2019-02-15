@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = ['item1', 'item2', 'item3', 'item4', 'item5'];
+        let obj = [{
+            content: 'section1',
+            index: 0
+        }, {
+            content: 'section2',
+            index: 2
+        }];
+
+        // function insertData(arr, index, val) {
+        //     arr[index] = [val, arr[index]];
+        //     return arr.flat(Infinity)
+        // }
+
+        // console.log(insertData(arr, 2, ['插入的新内容']));
+        function insertData(arr, obj) {
+
+            for (let i of obj) {
+                console.log(i)
+                arr.splice(i.index, 0, i.content)
+            }
+            console.log(arr);
+            return arr;
+        }
+        insertData(arr, obj);
+
+
+        let newArr = [];
+
+        function initArray(m, n) {
+            if (m > 0) {
+                m--;
+                newArr.push(n);
+                initArray(m, n)
+            }
+            return newArr;
+        }
+        console.log(initArray(10, 3));
+    </script>
+</body>
+
+</html>

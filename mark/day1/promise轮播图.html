@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //封装ajax
+        function getAjax(url) { //形参
+            //返回给了外边的这个函数  getAjax
+            return new Promise((resolve, reject) => {
+                //1、创建对象
+                let xml = new XMLHttpRequest();
+                //2、连接
+                xml.open(url, 'get', true);
+                //4、请求完成
+                xml.onreadystatechange = function() {
+                    if (xml.readyState === 4) {
+                        if (xml.status === 200) {
+                            //成功的操作
+                            resolve(xml.responseText);
+                        } else {
+                            //失败的操作
+                            reject('Err:请求失败' + url);
+                        }
+                    }
+                };
+                //3、发送
+                xml.send();
+            });
+        }
+        let getData = getAjax('./data/data.json'); //实参
+        getData.then((data) => {
+            console.log(JSON.parse(data))
+        })
+    </script>
+</body>
+
+</html>

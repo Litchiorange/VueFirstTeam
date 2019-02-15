@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //解构赋值
+        //1、从数组和对象中提取值给变量进行赋值
+        // let [name,age,address]=['张三',25,'河北'];
+        // console.log(name,age,address);
+
+        // let [username,password,[isNan1,isNan2]]=['李四','123456',['是','否']];
+        // console.log(username,password,isNan1,isNan2);
+
+        //rest操作符
+
+        // let [title,...num]=['求和',20,30,40,50,60,70,80];
+        // console.log(title,num);
+        //求和
+        // let sum=0;
+        // for(let i=0;i<num.length;i++){
+        //    sum+=num[i];
+        // }
+        // console.log(sum);
+
+        //对象
+        // let {
+        //     a:name, //name是变量名
+        //     b:age,
+        //     c:address
+        // }={
+        //     a:'张三',
+        //     b:20,
+        //     c:'河北'
+        // }
+        // console.log(name,age,address);
+
+        // let {
+        //     username, //name是键值
+        //     age1,
+        //     address1
+        // }={
+        //    username:'张三',
+        //    age1:20,
+        //    address1:'河北'
+        // }
+        // console.log(username,age1,address1);
+        
+        //创建节点
+        // <div id="wrap" class="wrap"><span></span></div>
+        function creatElement(obj){
+            // console.log(obj);
+            let {tag,props,children}=obj;
+            // console.log(tag,props,children);
+            //创建节点
+            let nodeBox=document.createElement(tag);
+           //判断是否存在props
+            if(props){
+               //遍历
+               Object.keys(props).map(function(item){
+                   //设置自定义属性有哪个添加哪个
+                   nodeBox.setAttribute(item,props[item])
+               })
+            }
+            //遍历子元素
+            children.map(function(item){
+                let childrennode=null;
+                if(typeof item==='string'){
+                    childrennode=document.createTextNode(item);
+                }
+                else{
+                    childrennode=creatElement(item);
+                }
+                nodeBox.appendChild(childrennode)
+            })
+            return nodeBox;
+        }
+        console.log(creatElement({
+            tag:'div',
+            props:{
+                id:'wrap',
+                classname:'wrap'
+            },
+            children:[{
+                tag:'span'
+            },'hello']
+        }))
+
+
+        //预习  字符串  和数组的方法
+    </script>
+</body>
+</html>
