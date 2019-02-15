@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 需求：
+        // ['section1', 'item1', 'item2', 'section2', 'item3', 'item4', 'item5'];
+
+        let arr = ['item1', 'item2', 'item3', 'item4', 'item5'];
+        let brr = [
+            { content: 'section1', index: 0 },
+            { content: 'section2', index: 2 }
+        ];
+
+        for (let val of brr) {
+            injectSections(arr, val.index, val.content);
+        }
+
+        function injectSections(arr, ind, value) {
+
+            if (arr[ind]) {
+                arr[ind] = [value, arr[ind]];
+            } else {
+                arr[ind] = value;
+            }
+            return arr.flat(Infinity);
+        };
+
+    </script>
+</body>
+
+</html>
