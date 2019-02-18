@@ -9,26 +9,56 @@
 </head>
 
 <body>
-    年龄:{age:age}<br>
-    <button id="add">增加</button>
+    <div id="wrap">
+        <p>数量:{count}</p>
+        <button id="add">增加</button>
+    </div>
+
     <script>
-        let obj = {
-            age: 20
-        };
-
-        //进入页面就调用函数  立即执行
-        Views(obj);
-
+        //获取到节点
         let add = document.querySelector('#add');
-        add.onclick = function() {
-            obj.age++;
-            Views(obj);
+
+        let data = {
+            count: 10
         };
 
+        add.onclick = function() {
+            data.count++;
+        };
 
+        //同步到页面5
         function Views(data) {
-            console.log(data)
+            console.log(data);
+            //找到页面 {count} 内容
+            //先找到父元素节点
+            let el = document.querySelector(data.el);
+            console.log(el);
+            //子元素 变成数组
+            let children = [...el.children];
+            console.log(children);
+            //正则
+            let reg = /{(\w+)}/;
+            console.log(reg)
+                //遍历
+            children.forEach(item => {
+                //每一项的内容
+                let text = item.innerHTML;
+                console.log(text);
+                if (reg.test(text)) {
+                    //字符 exec()  match()
+                    var title = text.match(reg)[1];
+                    console.log(title);
+                    //数字  10
+                    let num = data.data[title];
+                    //替换
+                    item.innerHTML = text.replace(reg, num);
+                }
+            });
         }
+        Views({
+            el: '#wrap',
+            data
+        });
     </script>
 </body>
 

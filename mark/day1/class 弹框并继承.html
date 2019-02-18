@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrap">
+
+    </div>
+    <script>
+        class Dialog {
+            constructor(parent, options) {
+                this.parent = parent;
+                this.options = options;
+                console.log(this.parent, this.options);
+                //默认参数
+                let defaults = {
+                    title: "确定购买",
+                    content: ["确定"],
+                    style: {
+                        height: 150,
+                        background: 'pink'
+                    }
+                };
+                //对style进行合并
+                let style = Object.assign({}, defaults.style, options.style);
+                //合并
+                let settings = Object.assign({}, defaults, options);
+                settings.style = style;
+                // console.log(settings);
+                this.settings = settings;
+                //调用方法 渲染页面
+                this.rander();
+            }
+            rander() {
+                    //获取到标题
+                    let {
+                        title,
+                        content,
+                        style
+                    } = this.settings;
+                    console.log(title, content);
+                    // console.log(this.settings)
+                    let html = `
+                    <div class="dialog" style="${Object.entries(style).map(arr=>arr[0] + ":" + (typeof arr[1]==='number'?arr[1] + "px":arr[1])).join(';')}">
+                        <h2 class="dialogg_title">${title}</h2>
+                        <div class="dialog_btn">
+                            ${content.map((btns,i)=>
+                                `<button class="btn${i}">${btns}</button>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+                this.dialogel=document.createElement('div');
+                this.dialogel.className='dialog_mask';
+                this.dialogel.innerHTML=html;
+                this.parent.appendChild( this.dialogel);
+            }
+           
+        }
+
+
+        const dialog=new Dialog(document.querySelector('#wrap'), {
+            title: "确定要购买吗?",
+            content: ["确定", "取消"],
+            style: {
+                width: 100
+            }
+        });
+
+       
+        //es6继承
+
+        class NewDialog extends Dialog {
+            constructor(parent, option) {
+                //在构造函数内部，调用父对象
+                super(parent, option);
+                this.move();
+            }
+            move() {
+                //获取到节点
+                let dialogs = this.dialogel.querySelector('.dialog');
+                dialogs.style.position='absolute';
+                    //按下
+                dialogs.onmousedown = (e) => {
+                    let {
+                        x,
+                        y
+                    } = {
+                        x: e.clientX - dialogs.offsetLeft,
+                        y: e.clientY - dialogs.offsetTop
+                    }
+                    document.onmousemove = (e) => {
+                        let {
+                            tops,
+                            lefts
+                        }={
+                            lefts:e.clientX - x,
+                            tops:e.clientY - y
+                        }
+                        dialogs.style.top = tops + "px";
+                        dialogs.style.left = lefts + "px";
+                       
+                    }   
+                } 
+                document.onmouseup = () => {
+                    document.onmousemove = null;
+                }
+            }
+        }
+        new NewDialog(document.querySelector('#wrap'), {
+            title: "确定要购买吗?",
+            content: ["确定", "取消"],
+            style: {
+                width: 100
+            }
+        });
+    </script>
+</body>
+
+</html

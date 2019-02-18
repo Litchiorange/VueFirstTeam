@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrap">
+
+    </div>
+    <script>
+        class Dialog {
+            constructor(parent, opt) {
+                this.parent = parent;
+                this.options = opt;
+                //默认参数
+                let defaults = {
+                    title: '购买',
+                    content: ['确定', '取消'],
+                    style: {
+                        height: 120,
+                        background: 'red'
+                    }
+                };
+                //合并
+                let style = Object.assign({}, defaults.style, opt.style);
+                let settings = Object.assign({}, defaults, opt);
+                settings.style = style;
+                // console.log(settings)
+                this.settings = settings;
+                //调用
+                this.rander();
+            }
+            rander() {
+                    let {
+                        title,
+                        content,
+                        style
+                    } = this.settings;
+                    console.log(title, style, content);
+                    //渲染
+                    let html = `
+                <div class="dialog" style="${Object.entries(style).map(arr=>arr[0] + ":" + (typeof arr[1]==='number'?arr[1]+"px":arr[1])).join(';')}">
+                        <p class="dialog_title">${title}</p>
+                        <div class="dialog_btn">
+                            ${content.map((item,i)=>`<button class="btn${i}">${item}</button>`).join('')}
+                        </div>
+                    </div>
+                `;
+                this.dialogel=document.createElement('div');
+                this.dialogel.className='dialog_mask';
+                this.dialogel.innerHTML=html;
+                this.parent.appendChild(this.dialogel)
+            }
+        }
+
+        new Dialog(document.querySelector('.wrap'), {
+            title: '确定购买',
+            content: ['确定', '取消'],
+            style: {
+                width: 100
+            }
+        })
+    </script>
+</body>
+
+</html>

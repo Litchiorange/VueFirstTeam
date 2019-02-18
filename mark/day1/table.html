@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="wrap wrap1">
+        <div class="top">
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
+        <div class="cont">
+            <div class="active">内容1</div>
+            <div>内容2</div>
+            <div>内容3</div>
+        </div>
+    </div>
+    <div class="wrap wrap2">
+        <div class="top">
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
+        <div class="cont">
+            <div class="active">内容1</div>
+            <div>内容2</div>
+            <div>内容3</div>
+        </div>
+    </div>
+    <script>
+        class Table {
+            constructor(opt) {
+                this.opt = opt;
+                //父盒子
+                this.tableBox = document.querySelector(opt.tableBox);
+                //button按钮盒子
+                this.topButton = document.querySelector(opt.top);
+                //内容盒子
+                this.cont = document.querySelector(opt.cont);
+                //类名
+                this.classname = opt.classname;
+                this.init();
+            }
+            init() {
+                this.addEvent();
+            }
+            addEvent() {
+                //button按钮的集合
+                this.btntag = [...this.topButton.children];
+                //内容的集合
+                this.contag = [...this.cont.children];
+                console.log(this.btntag, this.contag);
+                //遍历
+                Object.values(this.btntag).forEach((item, i) => {
+                    item.onclick = () => {
+                        this.change(i);
+                    }
+                });
+            }
+            change(ind) {
+                //遍历
+                Object.values(this.btntag).forEach((key, index) => {
+                    //先清除
+                    key.classList.remove(this.classname);
+                    this.contag[index].classList.remove(this.classname);
+                });
+                //添加
+                this.btntag[ind].classList.add(this.classname);
+                this.contag[ind].classList.add(this.classname);
+            }
+        }
+        new Table({
+            tableBox: '.wrap1',
+            top: '.top',
+            cont: '.cont',
+            classname: 'active'
+        })
+
+        class NewTable extends Table {
+            constructor(opt) {
+                super(opt);
+
+                this.index = opt.index;
+                this.time = opt.time;
+                this.timer = null;
+                //调用
+                this.autoplay();
+            }
+            autoplay() {
+                this.timer = setInterval(() => {
+                    this.index++;
+                    this.index = this.index % this.btntag.length;
+                    this.change(this.index);
+                }, this.time)
+            }
+        }
+
+        new NewTable({
+            tableBox: '.wrap2',
+            top: '.top',
+            cont: '.cont',
+            classname: 'active',
+            index: 2,
+            time: 1000
+        })
+    </script>
+</body>
+
+</html>
